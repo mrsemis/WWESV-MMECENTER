@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Min Plan</title>
+  <title>WWE</title>
   <style>
-    /* --- Basestil --- */
+    /* --- Basestil (mørkt tema) --- */
     body {
       font-family: "Inter", sans-serif;
-      background-color: #f8f9fa;
-      color: #222;
+      background-color: #0d1117;
+      color: #e6edf3;
       margin: 0;
       padding: 0;
       display: flex;
@@ -24,12 +24,13 @@
     }
 
     h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.2rem;
+      margin-bottom: 0.3rem;
+      color: #58a6ff;
     }
 
     p {
-      color: #666;
+      color: #8b949e;
     }
 
     /* --- Figur-bokse --- */
@@ -38,45 +39,67 @@
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
       width: 90%;
-      max-width: 800px;
+      max-width: 900px;
       margin-top: 2rem;
     }
 
     .card {
-      background: white;
+      background: #161b22;
       border-radius: 16px;
       padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.7);
     }
 
     .card h2 {
       margin-top: 0;
       font-size: 1.3rem;
-      color: #0070f3;
+      color: #79c0ff;
+    }
+
+    .card ul, .card p {
+      color: #c9d1d9;
+      line-height: 1.5;
     }
 
     footer {
       margin-top: auto;
       padding: 2rem;
-      color: #888;
+      color: #6e7681;
       font-size: 0.9rem;
+    }
+
+    /* --- Knappen til at tilføje bokse --- */
+    #addCardBtn {
+      margin-top: 20px;
+      background: #238636;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    #addCardBtn:hover {
+      background: #2ea043;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>🕓 Dagens Plan</h1>
-    <p>Hold styr på hvad der sker i dag</p>
+    <h1>💪 WWE</h1>
+    <p>Hold styr på alt – kampe, planer, ideer eller hvad du vil!</p>
   </header>
 
-  <main class="card-container">
-    <!-- Her er dine “figurer” -->
+  <main class="card-container" id="cardContainer">
+    <!-- Eksempel-boks -->
     <section class="card">
       <h2>Tidsplan</h2>
       <ul>
@@ -88,15 +111,31 @@
       </ul>
     </section>
 
-    <!-- Eksempel på en ekstra boks -->
+    <!-- Ekstra eksempel -->
     <section class="card">
       <h2>Noter</h2>
-      <p>Her kan du skrive ekstra ting — fx hvad man skal huske at tage med.</p>
+      <p>Her kan du skrive ting du skal huske – fx hvem der skal med.</p>
     </section>
   </main>
 
+  <button id="addCardBtn">+ Tilføj ny boks</button>
+
   <footer>
-    Lavet af Oliver 💪 | Super clean layout ✨
+    Lavet af Oliver 🦾 | Mørkt og super clean 🖤
   </footer>
+
+  <script>
+    // Gør det nemt at tilføje nye bokse
+    document.getElementById("addCardBtn").addEventListener("click", () => {
+      const title = prompt("Titel på din nye boks:");
+      const text = prompt("Indhold til boksen:");
+      if (!title || !text) return;
+
+      const newCard = document.createElement("section");
+      newCard.className = "card";
+      newCard.innerHTML = `<h2>${title}</h2><p>${text}</p>`;
+      document.getElementById("cardContainer").appendChild(newCard);
+    });
+  </script>
 </body>
 </html>
