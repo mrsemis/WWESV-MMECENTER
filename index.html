@@ -1,136 +1,218 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WWE</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WWE — Event</title>
+  <meta name="description" content="WWE event — tidsplan og menukort" />
+  <meta name="theme-color" content="#0d1117" />
+
   <style>
-    /* --- Basestil (mørkt tema) --- */
-    body {
-      font-family: "Inter", sans-serif;
-      background-color: #0d1117;
-      color: #e6edf3;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+    :root{
+      --bg: #0d1117;
+      --card: #161b22;
+      --muted: #8b949e;
+      --text: #e6edf3;
+      --accent: #58a6ff;
+      --card-radius: 14px;
+      --gap: 1.25rem;
+      --max-w: 1100px;
     }
+
+    .light {
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --muted: #4b5563;
+      --text: #0b1220;
+      --accent: #0066cc;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg), rgba(10,10,10,0.6));
+      color:var(--text);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      min-height:100vh;
+      padding:1.25rem;
+    }
+
+    a.skip {position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    a.skip:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:var(--card);border-radius:6px;color:var(--text);text-decoration:none}
 
     header {
-      margin-top: 40px;
-      text-align: center;
+      width:100%;
+      max-width:var(--max-w);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:1.25rem;
     }
 
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.3rem;
-      color: #58a6ff;
+    .brand {
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+    }
+    .logo {
+      display:inline-grid;
+      place-items:center;
+      width:48px;height:48px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent), #2dd4bf);
+      color:#fff;font-weight:700;font-size:1.1rem;
+      box-shadow:0 6px 18px rgba(0,0,0,0.4);
+    }
+    h1{font-size:1.25rem;margin:0}
+    header p{margin:0;color:var(--muted);font-size:.95rem}
+
+    .controls {display:flex; gap:.5rem; align-items:center}
+    .btn {
+      background:transparent;
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.06);
+      padding:.45rem .6rem;border-radius:10px;
+      cursor:pointer;font-size:.9rem;
+      display:inline-flex;align-items:center;gap:.5rem;
+    }
+    .btn:focus{outline:3px solid rgba(88,166,255,0.18)}
+
+    main {
+      width:100%;
+      max-width:var(--max-w);
+      display:grid;
+      grid-template-columns:1fr 360px;
+      gap:var(--gap);
+      align-items:start;
     }
 
-    p {
-      color: #8b949e;
+    @media (max-width:900px){
+      main{grid-template-columns:1fr}
     }
 
-    /* --- Figur-bokse --- */
     .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      width: 90%;
-      max-width: 900px;
-      margin-top: 2rem;
+      display:grid;
+      gap:var(--gap);
     }
 
     .card {
-      background: #161b22;
-      border-radius: 16px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      transition: transform 0.2s, box-shadow 0.2s;
+      background:var(--card);
+      border-radius:var(--card-radius);
+      padding:1.25rem;
+      box-shadow:0 6px 22px rgba(2,6,23,0.6);
+      transition:transform .15s ease, box-shadow .15s ease;
     }
+    .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(2,6,23,0.7)}
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.7);
-    }
+    .card h2{margin:0 0 .5rem 0;color:var(--accent)}
+    .card img{width:100%;height:auto;border-radius:10px;display:block;margin:0 0 .75rem 0}
 
-    .card h2 {
-      margin-top: 0;
-      font-size: 1.3rem;
-      color: #79c0ff;
-    }
+    .meta {color:var(--muted);font-size:.95rem;margin-bottom:.5rem}
+    ul {margin:0;padding-left:1rem;color:var(--text)}
+    li{margin:.45rem 0;line-height:1.4}
 
-    .card ul, .card p {
-      color: #c9d1d9;
-      line-height: 1.5;
-    }
-
+    aside .card {position:sticky;top:1rem}
     footer {
-      margin-top: auto;
-      padding: 2rem;
-      color: #6e7681;
-      font-size: 0.9rem;
+      width:100%;
+      max-width:var(--max-w);
+      margin-top:1.5rem;
+      padding:1rem 0;
+      color:var(--muted);
+      font-size:.9rem;
+      text-align:center;
     }
 
-    /* --- Knappen til at tilføje bokse --- */
-    #addCardBtn {
-      margin-top: 20px;
-      background: #238636;
-      color: white;
-      border: none;
-      padding: 0.7rem 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.2s;
-    }
+    /* small decorative list for menu prices */
+    .price {float:right;color:var(--muted);font-weight:600}
 
-    #addCardBtn:hover {
-      background: #2ea043;
-    }
   </style>
 </head>
 <body>
+  <a class="skip" href="#cardContainer">Skip to content</a>
+
   <header>
-    <h1>💪 WWE</h1>
-    <p>Hold styr på alt – kampe, planer, ideer eller hvad du vil!</p>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">W</div>
+      <div>
+        <h1>WWE — Event</h1>
+        <p>Alt fra kampe til mad og hygge</p>
+      </div>
+    </div>
+
+    <div class="controls" role="toolbar" aria-label="Site controls">
+      <button id="themeToggle" class="btn" aria-pressed="false" aria-label="Skift tema">☾ Skift tema</button>
+    </div>
   </header>
 
-  <main class="card-container" id="cardContainer">
-    <!-- Eksempel-boks -->
-    <section class="card">
-      <h2>Tidsplan</h2>
-      <ul>
-        <li>Mødes – <strong>16:00</strong></li>
-        <li>WWE – <strong>16:30</strong></li>
-        <li>Spise – <strong>når man er sulten 🍔</strong></li>
-        <li>Frileg – <strong>18:30</strong></li>
-        <li>Gå hjem – <strong>19:00</strong></li>
-      </ul>
+  <main>
+    <section class="card-container" id="cardContainer" tabindex="-1">
+      <article class="card" aria-labelledby="tidsplan">
+        <h2 id="tidsplan">Tidsplan ⏱️</h2>
+        <p class="meta">Mødested og aktiviteter — tag evt. varmt tøj med</p>
+        <img src="https://svommecenter.dk/wp-content/uploads/2025/09/LivredderPatrulje-leg-med-redningskranse-1024x683.jpg" alt="Deltagere ved event" />
+        <ul>
+          <li>Mødes – <strong>16:00</strong></li>
+          <li>WWE – <strong>16:30</strong></li>
+          <li>Spise – <strong>når man er sulten 🍔</strong></li>
+          <li>Frileg – <strong>18:30</strong></li>
+          <li>Gå hjem – <strong>19:00</strong></li>
+        </ul>
+      </article>
+
+      <article class="card" aria-labelledby="menu">
+        <h2 id="menu">Menu Kort 🍽️</h2>
+        <p class="meta">Priser er vejledende</p>
+        <ul>
+          <li>Pomfritter <span class="price">35 kr.</span></li>
+          <li>Fransk Hotdog <span class="price">34 kr.</span></li>
+          <li>PølseMix <span class="price">59 kr.</span></li>
+          <li>Bøf <span class="price">80 kr.</span></li>
+          <li>CheeseBurger <span class="price">56 kr.</span></li>
+          <li>Nachos <span class="price">56–69 kr.</span></li>
+          <li>Sodavand <span class="price">20 kr.</span></li>
+        </ul>
+      </article>
     </section>
 
-    <!-- Ekstra eksempel -->
-    <section class="card">
-      <h2>Menu Kort</h2>
-        <li>Bøf – <strong>150kr.</strong></li>
-        <li>Fransk Hotdog – <strong>34kr.</strong></li>
-        <li>PølseMix – <strong>59kr.</strong></li>
-        <li>KebabMix – <strong>59kr.</strong></li>
-        <li>CheeseBurger – <strong>56kr.</strong></li>
-        <li>Nachos – <strong>56 - 69kr.</strong></li>
-
-        <li>Sodavand – <strong>20kr.</strong></li>
-    </section>
+    <aside>
+      <div class="card" aria-labelledby="info">
+        <h2 id="info">Info & Links</h2>
+        <p class="meta">Praktisk info før event</p>
+        <ul>
+          <li>Find ekstra info i Facebook-gruppen.</li>
+          <li>Medbring godt humør og eventuelt kontanter.</li>
+          <li>Kontakt: <a href="svømmecenter@ikast-brande.dk">svømmecenter@ikast-brande.dk</a></li>
+        </ul>
+      </div>
+    </aside>
   </main>
 
-
-
   <footer>
-    Event Extra info
+    extra info til event <span id="updated">11/2025</span>
   </footer>
 
-
+  <script>
+    // Gem og skift tema (mørk / lys)
+    (function(){
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      const KEY = 'site-theme';
+      function applyTheme(theme){
+        if(theme === 'light'){ document.body.classList.add('light'); btn.textContent = '☀️ Lys tema'; btn.setAttribute('aria-pressed','true'); }
+        else { document.body.classList.remove('light'); btn.textContent = '☾ Mørkt tema'; btn.setAttribute('aria-pressed','false'); }
+      }
+      const saved = localStorage.getItem(KEY) || 'dark';
+      applyTheme(saved);
+      btn.addEventListener('click', ()=>{
+        const next = document.body.classList.contains('light') ? 'dark' : 'light';
+        localStorage.setItem(KEY, next);
+        applyTheme(next);
+      });
+    })();
+  </script>
 </body>
 </html>
