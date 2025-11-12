@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Min Plan</title>
+  <style>
+    /* --- Basestil --- */
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #f8f9fa;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #666;
+    }
+
+    /* --- Figur-bokse --- */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      width: 90%;
+      max-width: 800px;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+      color: #0070f3;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 2rem;
+      color: #888;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🕓 Dagens Plan</h1>
+    <p>Hold styr på hvad der sker i dag</p>
+  </header>
+
+  <main class="card-container">
+    <!-- Her er dine “figurer” -->
+    <section class="card">
+      <h2>Tidsplan</h2>
+      <ul>
+        <li>Mødes – <strong>16:00</strong></li>
+        <li>WWE – <strong>16:30</strong></li>
+        <li>Spise – <strong>når man er sulten 🍔</strong></li>
+        <li>Frileg – <strong>18:30</strong></li>
+        <li>Gå hjem – <strong>19:00</strong></li>
+      </ul>
+    </section>
+
+    <!-- Eksempel på en ekstra boks -->
+    <section class="card">
+      <h2>Noter</h2>
+      <p>Her kan du skrive ekstra ting — fx hvad man skal huske at tage med.</p>
+    </section>
+  </main>
+
+  <footer>
+    Lavet af Oliver 💪 | Super clean layout ✨
+  </footer>
+</body>
+</html>
