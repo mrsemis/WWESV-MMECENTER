@@ -113,29 +113,22 @@
 
     <!-- Ekstra eksempel -->
     <section class="card">
-      <h2>Noter</h2>
-      <p>Her kan du skrive ting du skal huske – fx hvem der skal med.</p>
+      <h2>Menu Kort</h2>
+        <li>Pomfritter – <strong>35kr.</strong></li>
+        <li>Fransk Hotdog – <strong>34kr.</strong></li>
+        <li>PølseMix – <strong>59kr.</strong></li>
+        <li>KebabMix – <strong>59kr.</strong></li>
+        <li>CheeseBurger – <strong>56kr.</strong></li>
+        <li>Nachos – <strong>56 - 69kr.</strong></li>
     </section>
   </main>
 
-  <button id="addCardBtn">+ Tilføj ny boks</button>
+
 
   <footer>
-    Lavet af Oliver 🦾 | Mørkt og super clean 🖤
+    Event Extra info
   </footer>
 
-  <script>
-    // Gør det nemt at tilføje nye bokse
-    document.getElementById("addCardBtn").addEventListener("click", () => {
-      const title = prompt("Titel på din nye boks:");
-      const text = prompt("Indhold til boksen:");
-      if (!title || !text) return;
 
-      const newCard = document.createElement("section");
-      newCard.className = "card";
-      newCard.innerHTML = `<h2>${title}</h2><p>${text}</p>`;
-      document.getElementById("cardContainer").appendChild(newCard);
-    });
-  </script>
 </body>
 </html>
